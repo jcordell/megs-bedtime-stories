@@ -1,0 +1,25 @@
+export const TOPIC_LABELS: Record<string, string> = {
+  history: "History",
+  science: "Science",
+  body: "Body",
+  mind: "Mind",
+  food: "Food",
+  animals: "Animals",
+  nature: "Nature",
+  space: "Space",
+  crime: "Crime",
+  mysteries: "Mysteries",
+  money: "Money",
+  culture: "Culture",
+  music: "Music",
+  sports: "Sports",
+  technology: "Tech",
+  politics: "Politics",
+  war: "War",
+  language: "Language",
+  weird: "Weird",
+  holidays: "Holidays",
+  religion: "Religion",
+}
+
+export const TOPIC_ORDER = Object.keys(TOPIC_LABELS)
