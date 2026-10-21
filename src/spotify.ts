@@ -4,9 +4,22 @@ export function spotifyShowUrl() {
   return SHOW_URL
 }
 
+function opensInSpotifyApp() {
+  const ua = navigator.userAgent
+  if (/Android|iPhone|iPad|iPod/i.test(ua)) return true
+  // iPadOS reports itself as a Mac, but it still has a touch screen.
+  return navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1
+}
+
 export function openEpisodeInSpotify(title: string) {
-  const query = `${title} Stuff You Should Know`
-  const url = `https://open.spotify.com/search/${encodeURIComponent(query)}/episodes`
+  const query = encodeURIComponent(`${title} Stuff You Should Know`)
+  // The phone app reads the last part of the path as the search text, so a
+  // link ending in /episodes searches for the word "episodes".
+  if (opensInSpotifyApp()) {
+    window.location.assign(`https://open.spotify.com/search/${query}`)
+    return
+  }
+  const url = `https://open.spotify.com/search/${query}/episodes`
   const width = 460
   const height = 780
   const left = Math.max(0, window.screenX + (window.outerWidth - width) / 2)
