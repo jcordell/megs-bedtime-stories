@@ -177,7 +177,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f1e8] text-[#241c16] dark:bg-[#12100e] dark:text-[#f4ece3]">
+    <div className="min-h-full bg-[#f6f1e8] text-[#241c16] dark:bg-[#12100e] dark:text-[#f4ece3]">
       <header className="border-b border-stone-300/80 bg-[#f6f1e8]/90 backdrop-blur dark:border-white/10 dark:bg-[#12100e]/90">
         <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-4 px-4 py-6 sm:px-6">
           <div>
