@@ -168,26 +168,12 @@ export default function App() {
     localStorage.setItem("theme", next ? "dark" : "light")
   }
 
-  function toggleTopic(topic: string) {
-    setTopics((current) =>
-      current.includes(topic) ? current.filter((item) => item !== topic) : [...current, topic],
-    )
+  function selectTopic(topic: string) {
+    setTopics([topic])
   }
 
-  function toggleFormat(format: EpisodeFormat) {
-    setFormats((current) =>
-      current.includes(format) ? current.filter((item) => item !== format) : [...current, format],
-    )
-  }
-
-  function applyBedtime() {
-    setFormats(["episode"])
-    setMinMinutes(40)
-    setTopics([])
-    setYearFrom(years.min)
-    setYearTo(years.max)
-    setSort("newest")
-    setQuery("")
+  function selectFormat(format: EpisodeFormat) {
+    setFormats([format])
   }
 
   return (
@@ -199,7 +185,7 @@ export default function App() {
               Stuff You Should Know
             </p>
             <h1 className="mt-1 font-serif text-4xl tracking-tight text-balance sm:text-5xl">
-              Something to fall asleep to
+              Meg's bedtime stories
             </h1>
             <p className="mt-2 max-w-xl text-sm text-stone-600 dark:text-stone-400">
               {episodes.length > 0 ? `${episodes.length.toLocaleString()} episodes` : "Episodes"} from
@@ -227,26 +213,17 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-        <div className="sticky top-0 z-10 -mx-4 mb-4 border-b border-transparent bg-[#f6f1e8]/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 dark:bg-[#12100e]/95">
+        <div className="mb-4">
           <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <label className="relative min-w-0 flex-1">
-                <span className="sr-only">Search episodes</span>
-                <input
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search titles and show notes"
-                  className="w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 text-base outline-none placeholder:text-stone-400 focus:border-lamp-deep dark:border-white/10 dark:bg-[#1c1916] dark:placeholder:text-stone-500 dark:focus:border-lamp"
-                />
-              </label>
-              <button
-                type="button"
-                onClick={applyBedtime}
-                className="rounded-2xl bg-lamp px-4 py-3 text-sm font-medium text-zinc-950 transition hover:brightness-105"
-              >
-                Bedtime length
-              </button>
-            </div>
+            <label className="relative min-w-0">
+              <span className="sr-only">Search episodes</span>
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search titles and show notes"
+                className="w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 text-base outline-none placeholder:text-stone-400 focus:border-lamp-deep dark:border-white/10 dark:bg-[#1c1916] dark:placeholder:text-stone-500 dark:focus:border-lamp"
+              />
+            </label>
 
             <div className="flex flex-wrap items-center gap-2">
               {FORMAT_OPTIONS.map((option) => {
@@ -256,7 +233,7 @@ export default function App() {
                     key={option.id}
                     type="button"
                     aria-pressed={on}
-                    onClick={() => toggleFormat(option.id)}
+                    onClick={() => selectFormat(option.id)}
                     className={`rounded-full px-3 py-1 text-sm transition ${
                       on
                         ? "bg-[#241c16] text-[#f6f1e8] dark:bg-[#f4ece3] dark:text-[#1a1512]"
@@ -345,7 +322,7 @@ export default function App() {
                     key={topic}
                     type="button"
                     aria-pressed={on}
-                    onClick={() => toggleTopic(topic)}
+                    onClick={() => selectTopic(topic)}
                     className={`rounded-full px-2.5 py-1 text-xs ${
                       on
                         ? "bg-lamp text-zinc-950"
@@ -365,7 +342,7 @@ export default function App() {
             {status === "loading"
               ? "Loading the catalog…"
               : `${filtered.length.toLocaleString()} shown`}
-            {topics.length > 0 ? " · any selected topic" : ""}
+            {topics.length > 0 ? ` · ${TOPIC_LABELS[topics[0]] ?? topics[0]}` : ""}
           </p>
           {pageCount > 1 && (
             <p>
