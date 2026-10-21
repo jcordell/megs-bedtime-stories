@@ -381,22 +381,17 @@ export default function App() {
                     const open = openId === episode.id
                     return (
                       <Fragment key={episode.id}>
-                        <tr className="border-b border-stone-100 hover:bg-stone-50 dark:border-white/5 dark:hover:bg-white/5">
+                        <tr
+                          className="cursor-pointer border-b border-stone-100 hover:bg-stone-50 dark:border-white/5 dark:hover:bg-white/5"
+                          onClick={() => setOpenId(open ? null : episode.id)}
+                        >
                           <td className="px-3 py-3">
                             <PlayButton title={episode.title} />
                           </td>
                           <td className="px-3 py-3 text-sm text-stone-500 tabular-nums dark:text-stone-400">
                             {formatDate(episode.date)}
                           </td>
-                          <td className="px-3 py-3">
-                            <button
-                              type="button"
-                              onClick={() => setOpenId(open ? null : episode.id)}
-                              className="text-left font-medium underline-offset-2 hover:underline"
-                            >
-                              {episode.title}
-                            </button>
-                          </td>
+                          <td className="px-3 py-3 font-medium">{episode.title}</td>
                           <td className="px-3 py-3 text-sm text-stone-500 tabular-nums whitespace-nowrap dark:text-stone-400">
                             {formatDuration(episode.duration)}
                           </td>
@@ -426,13 +421,12 @@ export default function App() {
                     key={episode.id}
                     className="rounded-2xl border border-stone-300 bg-white dark:border-white/10 dark:bg-[#1a1714]"
                   >
-                    <div className="flex items-start gap-3 p-3">
+                    <div
+                      className="flex cursor-pointer items-start gap-3 p-3"
+                      onClick={() => setOpenId(open ? null : episode.id)}
+                    >
                       <PlayButton title={episode.title} />
-                      <button
-                        type="button"
-                        onClick={() => setOpenId(open ? null : episode.id)}
-                        className="min-w-0 flex-1 text-left"
-                      >
+                      <div className="min-w-0 flex-1 text-left">
                         <p className="font-medium">{episode.title}</p>
                         <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                           {formatDate(episode.date)} · {formatDuration(episode.duration)}
@@ -440,7 +434,7 @@ export default function App() {
                         <div className="mt-2">
                           <TopicPills topics={episode.topics} />
                         </div>
-                      </button>
+                      </div>
                     </div>
                     {open && <Notes episode={episode} />}
                   </li>
