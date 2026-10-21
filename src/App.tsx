@@ -465,12 +465,8 @@ export default function App() {
           </div>
         )}
 
-        <p className="mt-8 max-w-2xl text-xs leading-relaxed text-stone-500 dark:text-stone-500">
-          Titles, dates, and show notes come from the public RSS feed. Topics come from Jev,
-          which can assign more than one label from the title and show notes. Spotify doesn’t
-          publish a full episode index without an app login, so play opens a Spotify window
-          searched to that episode. Transcript links go to the show’s own transcript when one
-          is published.
+        <p className="mt-8 text-sm text-stone-500 dark:text-stone-400">
+          Made with love by Josh for Meg ❤️
         </p>
       </main>
     </div>
